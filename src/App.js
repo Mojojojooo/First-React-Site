@@ -1,30 +1,53 @@
 import "./styles.css";
 import { useState } from "react";
 
-// let userName = "Yashwanth Vernekar";
-// let color = "red";
+var emojiDic = {
+  "😂": "Laughing",
+  "😠": "Angry Face",
+  "🤩": "Star-struck",
+  "🤔": "Thinking face"
+};
+
+var emojis = Object.keys(emojiDic);
 
 export default function App() {
-  const [userInput, setUserInput] = useState("");
+  var [meaning, setMeaning] = useState("");
 
-  // function clickHandle() {
-  //   console.log("Click Me! button is Clicked");
-  //   var countc = count + 1;
-  //   console.log(countc);
-  //   setcount(countc);
-  // }
+  function emojiEventHandler() {
+    var userInput = event.target.value;
+    meaning = emojiDic[userInput];
 
-  function inputChangeHandler() {
-    // console.log(event.target.value);
-    setUserInput(event.target.value);
+    if (meaning === undefined) {
+      meaning = "Sorry Not found in DataBase";
+    }
+
+    console.log(meaning);
+    setMeaning(meaning);
+  }
+
+  function listItemClickHandler(emoji) {
+    meaning = emojiDic[emoji];
+    setMeaning(meaning);
   }
 
   return (
     <div className="App">
       <h1>Emoji Interpretor</h1>
-      <input onChange={inputChangeHandler}></input>
-      <div> Welcome {userInput} </div>
-      {/* <button onClick={clickHandle}>Click Me! {count}</button> */}
+      <input onChange={emojiEventHandler}></input>
+      <h2> {meaning} </h2>
+      <h3>Emojis We know !!</h3>
+      {emojis.map((emoji) => {
+        return (
+          <span
+            onClick={() => listItemClickHandler(emoji)}
+            key={emoji}
+            style={{ fontSize: "2rem", padding: ".5rem", cursor: "pointer" }}
+          >
+            {" "}
+            {emoji}{" "}
+          </span>
+        );
+      })}
     </div>
   );
 }
