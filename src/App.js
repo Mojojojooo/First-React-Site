@@ -5,7 +5,8 @@ var emojiDic = {
   "😂": "Laughing",
   "😠": "Angry Face",
   "🤩": "Star-struck",
-  "🤔": "Thinking face"
+  "🤔": "Thinking face",
+  "🤐": "Zipper-mouth face"
 };
 
 var emojis = Object.keys(emojiDic);
